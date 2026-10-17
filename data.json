@@ -1,6 +1,7 @@
 [
-  {"id": 1, "course": "DevOps", "duration_weeks": 12, "topics": ["Linux", "Git", "Docker", "Kubernetes"]},
-  {"id": 2, "course": "Python", "duration_weeks": 8, "topics": ["Basics", "Functions", "File Handling"]},
-  {"id": 3, "course": "Flask", "duration_weeks": 4, "topics": ["Routing", "Templates", "REST APIs"]},
-  {"id": 4, "course": "MongoDB", "duration_weeks": 3, "topics": ["Documents", "CRUD", "Atlas"]}
+  {"id": 1, "course": "DevOps", "duration_weeks": 16, "level": "Intermediate", "topics": ["Linux", "Git", "GitHub", "Docker", "Kubernetes", "CI/CD"]},
+  {"id": 2, "course": "Python", "duration_weeks": 8, "level": "Beginner", "topics": ["Basics", "Functions", "File Handling"]},
+  {"id": 3, "course": "Flask", "duration_weeks": 4, "level": "Beginner", "topics": ["Routing", "Templates", "REST APIs"]},
+  {"id": 4, "course": "MongoDB", "duration_weeks": 3, "level": "Beginner", "topics": ["Documents", "CRUD", "Atlas"]},
+  {"id": 5, "course": "AWS", "duration_weeks": 6, "level": "Intermediate", "topics": ["EC2", "S3", "IAM"]}
 ]
