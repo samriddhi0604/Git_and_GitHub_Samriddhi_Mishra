@@ -111,5 +111,39 @@ def success():
     return render_template("success.html")
 
 
+# ---------------- To-Do backend API ----------------
+TODO_COLLECTION = os.getenv("MONGO_TODO_COLLECTION", "todos")
+
+
+@app.route("/submittodoitem", methods=["POST"])
+def submit_todo_item():
+    """Accept itemName and itemDescription via POST and store them in MongoDB."""
+    # Accept both JSON bodies and normal HTML form submissions
+    payload = request.get_json(silent=True) or request.form
+    item_name = str(payload.get("itemName", "")).strip()
+    item_description = str(payload.get("itemDescription", "")).strip()
+
+    if not item_name or not item_description:
+        return jsonify({"error": "itemName and itemDescription are required"}), 400
+
+    document = {
+        "itemName": item_name,
+        "itemDescription": item_description,
+        "created_at": datetime.now(timezone.utc),
+    }
+    try:
+        result = get_collection(TODO_COLLECTION).insert_one(document)
+    except (PyMongoError, RuntimeError) as e:
+        reason = (str(e).strip() or type(e).__name__).splitlines()[0][:300]
+        return jsonify({"error": f"Could not save the to-do item: {reason}"}), 500
+
+    return jsonify({
+        "message": "To-Do item saved successfully",
+        "id": str(result.inserted_id),
+        "itemName": item_name,
+        "itemDescription": item_description,
+    }), 201
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
