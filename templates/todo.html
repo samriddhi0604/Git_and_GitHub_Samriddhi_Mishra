@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}To-Do{% endblock %}
+{% block content %}
+  <h1>To-Do Item</h1>
+  <p class="subtitle">Add a new item to your to-do list.</p>
+
+  <div id="result" role="status"></div>
+
+  <form id="todo-form" method="POST" action="/submittodoitem">
+    <label for="itemName">Item Name</label>
+    <input type="text" id="itemName" name="itemName" placeholder="e.g. Learn Git rebase" required>
+
+    <label for="itemDescription">Item Description</label>
+    <textarea id="itemDescription" name="itemDescription" placeholder="What needs to be done?" required></textarea>
+
+    <button type="submit">Add To-Do Item</button>
+  </form>
+
+  <p class="footer"><a href="{{ url_for('form') }}">Back to the main form</a></p>
+
+  <script>
+    // Send the form to the backend API without leaving the page
+    const form = document.getElementById("todo-form");
+    const result = document.getElementById("result");
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      result.className = "";
+      result.textContent = "Saving...";
+      try {
+        const response = await fetch(form.action, { method: "POST", body: new FormData(form) });
+        const data = await response.json();
+        if (response.ok) {
+          result.className = "success";
+          result.textContent = data.message;
+          form.reset();
+        } else {
+          result.className = "error";
+          result.textContent = "Error: " + data.error;
+        }
+      } catch (err) {
+        result.className = "error";
+        result.textContent = "Error: could not reach the server (" + err + ")";
+      }
+    });
+  </script>
+{% endblock %}

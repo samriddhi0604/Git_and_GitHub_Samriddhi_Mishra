@@ -6,6 +6,7 @@ Routes:
   /api      -> reads a JSON list from data.json (backend file) and returns it as JSON
   /         -> form that inserts the submitted data into MongoDB Atlas
   /success  -> "Data submitted successfully" page
+  /todo     -> To-Do page with a form (frontend)
 """
 import json
 import os
@@ -62,6 +63,13 @@ def api():
     if not isinstance(data, list):
         return jsonify({"error": "data.json must contain a JSON list"}), 500
     return jsonify(data)
+
+
+# ---------------- To-Do page (frontend) ----------------
+@app.route("/todo")
+def todo():
+    """Show the To-Do form (Item Name and Item Description)."""
+    return render_template("todo.html")
 
 
 # ---------------- Form + MongoDB Atlas ----------------
