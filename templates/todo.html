@@ -10,11 +10,17 @@
     <label for="itemId">Item ID</label>
     <input type="number" id="itemId" name="itemId" placeholder="e.g. 101" min="1">
 
+    <label for="itemUUID">Item UUID</label>
+    <input type="text" id="itemUUID" name="itemUUID" placeholder="e.g. 3f2b8c1e-9d4a-4b7e-a1c2-5e6f7a8b9c0d">
+
     <label for="itemName">Item Name</label>
     <input type="text" id="itemName" name="itemName" placeholder="e.g. Learn Git rebase" required>
 
     <label for="itemDescription">Item Description</label>
     <textarea id="itemDescription" name="itemDescription" placeholder="What needs to be done?" required></textarea>
+
+    <label for="itemHash">Item Hash</label>
+    <input type="text" id="itemHash" name="itemHash" placeholder="e.g. SHA-256 hash of the item">
 
     <button type="submit">Add To-Do Item</button>
   </form>
