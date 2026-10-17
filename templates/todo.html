@@ -7,6 +7,9 @@
   <div id="result" role="status"></div>
 
   <form id="todo-form" method="POST" action="/submittodoitem">
+    <label for="itemId">Item ID</label>
+    <input type="number" id="itemId" name="itemId" placeholder="e.g. 101" min="1">
+
     <label for="itemName">Item Name</label>
     <input type="text" id="itemName" name="itemName" placeholder="e.g. Learn Git rebase" required>
 
