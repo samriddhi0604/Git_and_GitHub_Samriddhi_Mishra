@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Course Registration{% endblock %}
+{% block content %}
+  <h1>Course Registration</h1>
+  <p class="subtitle">Submit the form to save your details in MongoDB Atlas.</p>
+
+  {% if error %}
+    <div class="error" role="alert"><strong>Error:</strong> {{ error }}</div>
+  {% endif %}
+
+  <form method="POST" action="{{ url_for('form') }}" novalidate>
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" value="{{ values.get('name', '') }}" placeholder="Your full name">
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" value="{{ values.get('email', '') }}" placeholder="you@example.com">
+
+    <label for="course">Course</label>
+    <select id="course" name="course">
+      <option value="">-- Select a course --</option>
+      {% for c in ["DevOps", "Python", "Flask", "MongoDB"] %}
+        <option value="{{ c }}" {% if values.get('course') == c %}selected{% endif %}>{{ c }}</option>
+      {% endfor %}
+    </select>
+
+    <label for="message">Message (optional)</label>
+    <textarea id="message" name="message" placeholder="Anything you'd like to add">{{ values.get('message', '') }}</textarea>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <p class="footer">View the JSON API: <a href="{{ url_for('api') }}">/api</a></p>
+{% endblock %}

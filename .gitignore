@@ -1,0 +1,9 @@
+# Secrets - never push your real connection string
+.env
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+.pytest_cache/
